@@ -1,5 +1,6 @@
 const express = require("express");
-const router = express.Router();
+const courseRouter = require("./courses");
+const router = express.Router({ mergeParams: true });
 const {
   getBootcamp,
   getBootcamps,
@@ -7,6 +8,12 @@ const {
   updateBootcamp,
   deleteBootcamp,
 } = require("../controllers/bootcamps");
+
+const {
+  getCourses,
+} = require("../controllers/courses");
+
+router.use("/:bootcampId/courses", getCourses);
 
 router.route("/").get(getBootcamps).post(createBootcamp);
 
